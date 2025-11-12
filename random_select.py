@@ -11,10 +11,10 @@ def get_one_random(character: Character) -> StatusEffect | None:
     if effect_type in [Invincible, DoubleDamage, StunBlade]:
         return effect_type(character)
     elif effect_type is DamageReduction:
-        reduce_amount: int = randint(3, 5)
+        reduce_amount: int = randint(5, 15)
         return DamageReduction(character, reduce_amount)
     elif effect_type is Regenerate:
-        regen_amount: int = randint(1, 2)
+        regen_amount: int = randint(3, 7)
         regen_turns: int = randint(2, 4)
         return Regenerate(character, regen_turns, regen_amount)
     elif effect_type is PoisonBlade:
