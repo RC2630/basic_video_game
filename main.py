@@ -9,6 +9,8 @@ LINE_SEPARATOR: Final[str] = f"\n{ANSI_MAGENTA}{100 * '-'}{ANSI_NORMAL}"
 def get_user_choice(character: Character, num_choices: int = 3) -> StatusEffect | None:
 
     def is_valid(choice: str) -> bool:
+        if choice == "concede":
+            return True
         try:
             choice_num: int = int(choice)
             return 1 <= choice_num <= num_choices
@@ -25,11 +27,16 @@ def get_user_choice(character: Character, num_choices: int = 3) -> StatusEffect 
         else:
             print(choice)
 
-    entered: str = input(f"\nEnter your choice now: {ANSI_MAGENTA}")
+    entered: str = input("\nEnter your choice now " \
+                         f"(or {ANSI_RED}concede{ANSI_NORMAL}): {ANSI_MAGENTA}")
     print(ANSI_NORMAL, end = "")
     while not is_valid(entered):
         entered = input(f"Not accepted. Try again: {ANSI_MAGENTA}")
         print(ANSI_NORMAL, end = "")
+
+    if entered == "concede":
+        print(f"\n{character.name} has conceded!")
+        exit()
     entered_choice: int = int(entered)
 
     return choices[entered_choice - 1]
