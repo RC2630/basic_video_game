@@ -36,7 +36,7 @@ def get_user_choice(character: Character, num_choices: int = 3) -> StatusEffect 
 
 # ----------------------------------------------
 
-def play():
+def play() -> None:
 
     player_1: Character = Character(f"Player {ANSI_YELLOW}1{ANSI_NORMAL}", 10, 100)
     player_2: Character = Character(f"Player {ANSI_YELLOW}2{ANSI_NORMAL}", 10, 100)
@@ -51,6 +51,13 @@ def play():
 
         print(f"\nTurn {ANSI_BLUE}{turn}{ANSI_NORMAL}:")
         turn += 1
+
+        print(f"\n{ANSI_CYAN}Status effects carried over:{ANSI_NORMAL}")
+        if len(player_1.effects) == 0 and len(player_2.effects) == 0:
+            print("None")
+        for player in [player_1, player_2]:
+            for effect in player.effects:
+                print(f"{player.name}: {effect}")
 
         player_1_choice: StatusEffect | None = None
         player_2_choice: StatusEffect | None = None
@@ -70,6 +77,8 @@ def play():
              MultipleStatusEffects(status_effects):
             
             print(f"\n{ANSI_CYAN}Active status effects this turn:{ANSI_NORMAL}")
+            if len(player_1.effects) == 0 and len(player_2.effects) == 0:
+                print("None")
             for player in [player_1, player_2]:
                 for effect in player.effects:
                     print(f"{player.name}: {effect}")
