@@ -71,6 +71,9 @@ class Character:
             assert self.name == effect.character.name
             effect.add_to_character(active = True) # removes original if present
 
+    def update_stats_after_each_turn(self) -> None:
+        self.damage += 1 # makes gameplay more high-stakes as the game drags on
+
 # -------------------------------------
 
 class StatusEffect(ABC):

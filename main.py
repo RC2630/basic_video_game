@@ -66,6 +66,10 @@ def play() -> None:
             for effect in player.effects:
                 print(f"{player.name}: {effect}")
 
+        print(f"\n{ANSI_CYAN}Stats carried over and updated:{ANSI_NORMAL}")
+        for player in [player_1, player_2]:
+            print(player)
+
         player_1_choice: StatusEffect | None = None
         player_2_choice: StatusEffect | None = None
         if turn % 2 == 0:
@@ -105,6 +109,7 @@ def play() -> None:
 
         for player in [player_1, player_2]:
             player.activate_inactive_effects()
+            player.update_stats_after_each_turn()
 
     final_turns: str = f"{ANSI_BLUE}{turn - 1}{ANSI_NORMAL} {"turns" if turn - 1 >= 2 else "turn"}"
     if player_1.alive and not player_2.alive:
