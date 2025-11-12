@@ -1,7 +1,11 @@
 from random import randint
 from status_effects import *
 
-NUM_DUMMIES: Final[int] = round(len(ALL_STATUS_EFFECTS) / 2)
+NUM_DUMMIES: Final[int] = {
+    "no dummies": 0, # most action-packed but has higher chance of being unbalanced
+    "1/3 dummies": round(len(ALL_STATUS_EFFECTS) / 2),
+    "1/2 dummies": len(ALL_STATUS_EFFECTS)
+}["no dummies"]
 
 def get_one_random(character: Character) -> StatusEffect | None:
     random_index: int = randint(0, len(ALL_STATUS_EFFECTS) + NUM_DUMMIES - 1)
